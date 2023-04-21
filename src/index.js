@@ -6,13 +6,17 @@ const { config } = require('process');
 const app = express();
 const port = 3000;
 
+app.use(express.static(path.join(__dirname,'public')));
+
 //http logger
 app.use(morgan('combined'));
 
 //template engine
 
-app.engine('handlebars', handlebars());
-app.set('view engine', 'handlebars');
+app.engine('hbs', handlebars({
+  extname:'.hbs'
+}));
+app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname,'./resources/views'));
 
 
